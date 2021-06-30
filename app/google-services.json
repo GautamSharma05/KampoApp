@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "54410044392",
+    "project_id": "kampo-82b0e",
+    "storage_bucket": "kampo-82b0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54410044392:android:4a438f2e71d880b2a73a5d",
+        "android_client_info": {
+          "package_name": "com.example.kampo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54410044392-lcq94kfjd453n9k5lk08ls1t5cegkqc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3zSrEv7cS98_Pa6iZXry9JpsZtyBn4IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54410044392-lcq94kfjd453n9k5lk08ls1t5cegkqc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
