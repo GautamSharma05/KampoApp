@@ -25,6 +25,7 @@ public class WorkersAdapter extends FirestoreRecyclerAdapter<Workers,WorkersAdap
 
     @Override
     protected void onBindViewHolder(@NonNull @NotNull WorkersAdapter.WorkerHolder holder, int position, @NonNull @NotNull Workers model) {
+        holder.binding.workerName.setText(model.getFullName());
         Glide.with(holder.binding.workerImage.getContext()).load(model.getProfilePicUri()).placeholder(R.drawable.avatar).into(holder.binding.workerImage);
     }
 

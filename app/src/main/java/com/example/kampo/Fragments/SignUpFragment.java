@@ -86,6 +86,7 @@ public class SignUpFragment extends Fragment {
                 public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         FirebaseUser user = mAuth.getCurrentUser();
+
                         DocumentReference documentReference = fStore.collection("Users").document(Objects.requireNonNull(mAuth.getUid()));
                         Map<String, Object> users = new HashMap<>();
                         users.put("FullName", userFullName);
