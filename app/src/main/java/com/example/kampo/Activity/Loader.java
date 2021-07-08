@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.example.kampo.R;
 
-public class loader extends AppCompatActivity {
+public class Loader extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
