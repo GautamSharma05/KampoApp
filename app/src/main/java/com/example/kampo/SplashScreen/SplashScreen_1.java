@@ -12,32 +12,25 @@ import android.view.animation.AnimationUtils;
 
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentSplashScreen1Binding;
-<<<<<<< Updated upstream
 
-public class SplashScreen_1 extends Fragment {
-     FragmentSplashScreen1Binding binding;
-     Animation topanim,bottomanim;
-=======
+import org.jetbrains.annotations.NotNull;
 
 
 public class SplashScreen_1 extends Fragment {
-    FragmentSplashScreen1Binding binding;
->>>>>>> Stashed changes
+   FragmentSplashScreen1Binding binding;
+    Animation topAnim,bottomAnim;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSplashScreen1Binding.inflate(inflater,container,false);
-<<<<<<< Updated upstream
-//        Animation
-        topanim= AnimationUtils.loadAnimation(getContext(),R.anim.top_animation);
-        bottomanim=AnimationUtils.loadAnimation(getActivity(),R.anim.bottom_animation);
-        binding.splashScreen1Image.setAnimation(topanim);
-        binding.splashScreen1Heading.setAnimation(bottomanim);
-        binding.splashScreen1Text.setAnimation(bottomanim);
-        return binding.getRoot();
 
-=======
+//        Animation
+        topAnim= AnimationUtils.loadAnimation(getContext(),R.anim.top_animation);
+        bottomAnim=AnimationUtils.loadAnimation(getActivity(),R.anim.bottom_animation);
+        binding.splashScreen1Image.setAnimation(topAnim);
+        binding.splashScreen1Heading.setAnimation(bottomAnim);
+        binding.splashScreen1Text.setAnimation(bottomAnim);
         return binding.getRoot();
->>>>>>> Stashed changes
     }
 }

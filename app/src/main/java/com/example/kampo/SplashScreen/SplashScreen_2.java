@@ -13,20 +13,22 @@ import android.view.animation.AnimationUtils;
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentSplashScreen2Binding;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class SplashScreen_2 extends Fragment {
     FragmentSplashScreen2Binding binding;
-    Animation topanim,bottomanim;
+    Animation topAnim,bottomAnim;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding=FragmentSplashScreen2Binding.inflate(inflater,container,false);
 //        Animation
-        topanim= AnimationUtils.loadAnimation(getContext(),R.anim.top_animation);
-        bottomanim= AnimationUtils.loadAnimation(getContext(),R.anim.bottom_animation);
-        binding.splashScreen2Image.setAnimation(topanim);
-        binding.splashScreen2Heading.setAnimation(bottomanim);
-        binding.splashScreen2Text.setAnimation(bottomanim);
+        topAnim= AnimationUtils.loadAnimation(getContext(),R.anim.top_animation);
+        bottomAnim= AnimationUtils.loadAnimation(getContext(),R.anim.bottom_animation);
+        binding.splashScreen2Image.setAnimation(topAnim);
+        binding.splashScreen2Heading.setAnimation(bottomAnim);
+        binding.splashScreen2Text.setAnimation(bottomAnim);
         return binding.getRoot();
     }
 }

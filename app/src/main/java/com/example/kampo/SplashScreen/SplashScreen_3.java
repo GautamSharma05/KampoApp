@@ -13,30 +13,29 @@ import com.example.kampo.Activity.RegistrationActivity;
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentSplashScreen3Binding;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class SplashScreen_3 extends Fragment {
     FragmentSplashScreen3Binding binding;
-    Animation topanim,bottomanim;
+    Animation topAnim,bottomAnim;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSplashScreen3Binding.inflate(inflater,container,false);
-        binding.getStartedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegistrationActivity.class);
-                startActivity(intent);
-            }
+        binding.getStartedButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), RegistrationActivity.class);
+            startActivity(intent);
         });
 
 //        Animation
-        topanim= AnimationUtils.loadAnimation(getContext(), R.anim.top_animation);
-        bottomanim= AnimationUtils.loadAnimation(getContext(),R.anim.bottom_animation);
-        binding.splashScreen3Image.setAnimation(topanim);
-        binding.splashScreen3Heading.setAnimation(bottomanim);
-        binding.splashScreen3Text.setAnimation(bottomanim);
-        binding.getStartedButton.setAnimation(bottomanim);
+        topAnim= AnimationUtils.loadAnimation(getContext(), R.anim.top_animation);
+        bottomAnim= AnimationUtils.loadAnimation(getContext(),R.anim.bottom_animation);
+        binding.splashScreen3Image.setAnimation(topAnim);
+        binding.splashScreen3Heading.setAnimation(bottomAnim);
+        binding.splashScreen3Text.setAnimation(bottomAnim);
+        binding.getStartedButton.setAnimation(bottomAnim);
         return binding.getRoot();
     }
 }
