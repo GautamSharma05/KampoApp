@@ -9,19 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kampo">
-        <activity android:name=".Activity.RegistrationActivity"/>
+        <activity android:name=".Activity.loader"></activity>
+        <activity android:name=".Activity.RegistrationActivity" />
         <activity android:name=".SplashScreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.MainActivity"/>
-
-
+        <activity android:name=".Activity.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
