@@ -24,24 +24,26 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    ProgressDialog progressBar;
+
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater,container,false);
-        progressBar = new ProgressDialog(getContext());
-        progressBar.setMessage("Login...");
-        progressBar.setCancelable(false);
+
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = binding.userEmailAddressText.getText().toString().trim();
-                String password = binding.loginPasswordText.getText().toString().trim();
+                String email = Objects.requireNonNull(binding.userEmailAddressText.getText()).toString().trim();
+                String password = Objects.requireNonNull(binding.loginPasswordText.getText()).toString().trim();
                 logIn(email,password);
 
             }
@@ -60,7 +62,7 @@ public class LoginFragment extends Fragment {
             binding.loginPasswordText.setError("Password is required");
         }
         else{
-//            progressBar.show();
+
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
@@ -68,11 +70,11 @@ public class LoginFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUi(user);
-//                                progressBar.dismiss();
+
                             } else {
                                 Toast.makeText(getContext(), "May Be Your Email or Password Wrong!", Toast.LENGTH_SHORT).show();
                                 updateUi(null);
-//                                progressBar.dismiss();
+
                             }
                         }
                     });

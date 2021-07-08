@@ -1,12 +1,12 @@
 package com.example.kampo.Fragments;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.Loader;
+
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -40,16 +40,14 @@ public class SignUpFragment extends Fragment {
     private final FirebaseFirestore fStore= FirebaseFirestore.getInstance();
     String userFullName,email;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    ProgressDialog progressBar;
+
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSignUpBinding.inflate(inflater,container,false);
-        progressBar = new ProgressDialog(getContext());
-        progressBar.setMessage("Sign Up...");
-        progressBar.setCancelable(false);
+
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,9 +58,9 @@ public class SignUpFragment extends Fragment {
     }
 
     private void signUp() {
-        userFullName = binding.fullNameText.getText().toString().trim();
-        email = binding.emailAdressText.getText().toString().trim();
-        String password = binding.passwordText.getText().toString();
+        userFullName = Objects.requireNonNull(binding.fullNameText.getText()).toString().trim();
+        email = Objects.requireNonNull(binding.emailAdressText.getText()).toString().trim();
+        String password = Objects.requireNonNull(binding.passwordText.getText()).toString();
         if (TextUtils.isEmpty(userFullName)) {
             binding.fullNameText.setError("Full Name is Required");
         }
@@ -82,7 +80,7 @@ public class SignUpFragment extends Fragment {
             binding.checkBoxError.setVisibility(View.VISIBLE);
         }
         else {
-//            progressBar.show();
+
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
@@ -99,7 +97,7 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onSuccess(Void unused) {
                                 updateUI(user);
-//                                progressBar.dismiss();
+
                             }
 
                         });
@@ -107,7 +105,7 @@ public class SignUpFragment extends Fragment {
                     else {
                         Toast.makeText(getContext(), "May be Email is Already in used", Toast.LENGTH_SHORT).show();
                         updateUI(null);
-//                        progressBar.dismiss();
+
                     }
                 }
             });
