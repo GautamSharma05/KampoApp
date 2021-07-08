@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.example.kampo.R;
 
-public class Loader extends AppCompatActivity {
+public class loaderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class Loader extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         },3000);
     }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.kampo.Activity.MainActivity;
 
+import com.example.kampo.Activity.loaderActivity;
 import com.example.kampo.databinding.FragmentSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -114,7 +115,7 @@ public class SignUpFragment extends Fragment {
     }
     private void updateUI(FirebaseUser user) {
         if(user != null){
-            Intent intent = new Intent(getContext(),Loader.class);
+            Intent intent = new Intent(getContext(), loaderActivity.class);
             intent.putExtra("Name",userFullName);
             intent.putExtra("Email",email);
             startActivity(intent);

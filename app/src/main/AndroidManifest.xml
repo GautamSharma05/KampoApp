@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kampo">
-        <activity android:name=".Activity.Loader"></activity>
+        <activity android:name=".Activity.loaderActivity"></activity>
         <activity android:name=".Activity.RegistrationActivity" />
         <activity android:name=".SplashScreen.SplashScreenActivity">
             <intent-filter>

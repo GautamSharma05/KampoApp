@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.loader.content.Loader;
+
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.kampo.Activity.MainActivity;
-import com.example.kampo.R;
+import com.example.kampo.Activity.loaderActivity;
+
 import com.example.kampo.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,7 +81,7 @@ public class LoginFragment extends Fragment {
 
     private void updateUi(FirebaseUser user) {
         if(user != null){
-            Intent intent = new Intent(getContext(), Loader.class);
+            Intent intent = new Intent(getContext(), loaderActivity.class);
             startActivity(intent);
         }
         else{
