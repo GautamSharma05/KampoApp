@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.Loader;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -58,7 +59,7 @@ public class LoginFragment extends Fragment {
             binding.loginPasswordText.setError("Password is required");
         }
         else{
-            progressBar.show();
+//            progressBar.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
@@ -66,11 +67,11 @@ public class LoginFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUi(user);
-                                progressBar.dismiss();
+//                                progressBar.dismiss();
                             } else {
                                 Toast.makeText(getContext(), "May Be Your Email or Password Wrong!", Toast.LENGTH_SHORT).show();
                                 updateUi(null);
-                                progressBar.dismiss();
+//                                progressBar.dismiss();
                             }
                         }
                     });
@@ -79,7 +80,7 @@ public class LoginFragment extends Fragment {
 
     private void updateUi(FirebaseUser user) {
         if(user != null){
-            Intent intent = new Intent(getContext(), MainActivity.class);
+            Intent intent = new Intent(getContext(), Loader.class);
             startActivity(intent);
         }
         else{

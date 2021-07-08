@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.Loader;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -80,7 +81,7 @@ public class SignUpFragment extends Fragment {
             binding.checkBoxError.setVisibility(View.VISIBLE);
         }
         else {
-            progressBar.show();
+//            progressBar.show();
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
@@ -97,7 +98,7 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onSuccess(Void unused) {
                                 updateUI(user);
-                                progressBar.dismiss();
+//                                progressBar.dismiss();
                             }
 
                         });
@@ -105,7 +106,7 @@ public class SignUpFragment extends Fragment {
                     else {
                         Toast.makeText(getContext(), "May be Email is Already in used", Toast.LENGTH_SHORT).show();
                         updateUI(null);
-                        progressBar.dismiss();
+//                        progressBar.dismiss();
                     }
                 }
             });
@@ -113,7 +114,7 @@ public class SignUpFragment extends Fragment {
     }
     private void updateUI(FirebaseUser user) {
         if(user != null){
-            Intent intent = new Intent(getContext(), MainActivity.class);
+            Intent intent = new Intent(getContext(),Loader.class);
             intent.putExtra("Name",userFullName);
             intent.putExtra("Email",email);
             startActivity(intent);
