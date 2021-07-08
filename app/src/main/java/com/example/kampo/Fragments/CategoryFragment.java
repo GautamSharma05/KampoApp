@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.example.kampo.R;
+import com.example.kampo.databinding.FragmentCategoryBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +19,8 @@ import com.example.kampo.R;
  * create an instance of this fragment.
  */
 public class CategoryFragment extends Fragment {
-
+    FragmentCategoryBinding binding;
+    Animation leftanim, rightanim,topanim,bottomanim;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,7 +64,22 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        binding=FragmentCategoryBinding.inflate(inflater,container,false);
+
+//        Animation
+        leftanim= AnimationUtils.loadAnimation(getContext(),R.anim.left_animation);
+        rightanim= AnimationUtils.loadAnimation(getContext(),R.anim.right_animation);
+        topanim= AnimationUtils.loadAnimation(getContext(),R.anim.top_animation);
+        bottomanim= AnimationUtils.loadAnimation(getContext(),R.anim.bottom_animation);
+        binding.hairColor.setAnimation(topanim);
+        binding.hairCut.setAnimation(topanim);
+        binding.hairStyling.setAnimation(leftanim);
+        binding.massage.setAnimation(leftanim);
+        binding.hairTreatment.setAnimation(rightanim);
+        binding.categoryShaving.setAnimation(rightanim);
+        binding.facials.setAnimation(bottomanim);
+        binding.trimming.setAnimation(bottomanim);
+        return binding.getRoot();
+
     }
 }

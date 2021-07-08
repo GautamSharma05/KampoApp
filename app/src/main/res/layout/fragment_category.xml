@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/hairCut" />
 
     <ImageView
-        android:id="@+id/message"
+        android:id="@+id/massage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -111,7 +111,7 @@
         android:layout_marginRight="24dp"
         android:src="@drawable/categoryshaving"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/message"
+        app:layout_constraintStart_toEndOf="@+id/massage"
         app:layout_constraintTop_toBottomOf="@+id/hairTreatment" />
 
     <ImageView
@@ -123,10 +123,10 @@
         android:layout_marginTop="32dp"
         android:src="@drawable/facials"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        app:layout_constraintTop_toBottomOf="@+id/massage" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/trimming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
