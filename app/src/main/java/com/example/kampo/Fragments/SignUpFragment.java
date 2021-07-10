@@ -91,6 +91,8 @@ public class SignUpFragment extends Fragment {
                         Map<String, Object> users = new HashMap<>();
                         users.put("FullName", userFullName);
                         users.put("Email", email);
+                        users.put("PhoneNumber","xx-xxxx-xxxx");
+                        users.put("Gender","not mention");
                         users.put("UserId", mAuth.getUid());
                         users.put("UserProfilePic", "Default");
                         documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {

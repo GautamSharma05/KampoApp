@@ -265,7 +265,7 @@
         app:layout_constraintTop_toBottomOf="@+id/second_icon_row" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/hairSpecialistText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -277,20 +277,6 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hairSpa" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/workersRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingBottom="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
     <TextView
         android:id="@+id/sellAllText"
         android:layout_width="wrap_content"
@@ -303,6 +289,20 @@
         android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/more" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingBottom="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hairSpecialistText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
