@@ -1,6 +1,8 @@
 package com.example.kampo.Fragments;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,6 +19,8 @@ import com.example.kampo.databinding.FragmentHomeBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class HomeFragment extends Fragment {
     WorkersAdapter workersAdapter;
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
@@ -40,6 +44,10 @@ public class HomeFragment extends Fragment {
                 .setQuery(fStore.collection("Workers").limit(2),Workers.class).build();
             workersAdapter = new WorkersAdapter(workers);
             binding.workersRecyclerView.setAdapter(workersAdapter);
+            binding.sellAllText.setOnClickListener(v ->{
+                AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new AllWorkersFragment()).addToBackStack(null).commit();
+            });
         return binding.getRoot();
     }
 
