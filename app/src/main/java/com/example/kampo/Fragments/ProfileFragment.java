@@ -1,5 +1,6 @@
 package com.example.kampo.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 
 import com.bumptech.glide.Glide;
+import com.example.kampo.Activity.LoginActivity;
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentProfileBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +53,19 @@ public class ProfileFragment extends Fragment {
                 AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
                 appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new EditProfileFragment()).addToBackStack(null).commit();
             }
+        });
+        binding.settingsText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new SettingsFragment()).addToBackStack(null).commit();
+            }
+        });
+        binding.logOutText.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
 
         return binding.getRoot();

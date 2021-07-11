@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.kampo.Activity.LoginActivity;
 import com.example.kampo.Activity.MainActivity;
 
 import com.example.kampo.Activity.loaderActivity;
@@ -40,19 +41,15 @@ public class SignUpFragment extends Fragment {
     private final FirebaseFirestore fStore= FirebaseFirestore.getInstance();
     String userFullName,email;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-
-
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSignUpBinding.inflate(inflater,container,false);
 
-        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp();
-            }
+        binding.signUpButton.setOnClickListener(v -> signUp());
+        binding.logInText.setOnClickListener(v ->{
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
         });
         return binding.getRoot();
     }

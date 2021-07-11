@@ -1,16 +1,16 @@
 package com.example.kampo.Models;
 
 public class Workers {
-    String FullName,ProfilePicUri,Specialist,WorkerId;
+    String FullName,ProfilePicUri,Specialist,WorkerId,ProfileThumbnail;
 
     public Workers() {
     }
 
-    public Workers(String fullName, String profilePicUri, String specialist, String workerId) {
+    public Workers(String fullName, String profilePicUri, String specialist, String profileThumbnail) {
         FullName = fullName;
         ProfilePicUri = profilePicUri;
         Specialist = specialist;
-        WorkerId = workerId;
+        ProfileThumbnail = profileThumbnail;
     }
 
     public String getFullName() {
@@ -35,5 +35,13 @@ public class Workers {
 
     public void setSpecialist(String specialist) {
         Specialist = specialist;
+    }
+
+    public String getProfileThumbnail() {
+        return ProfileThumbnail;
+    }
+
+    public void setProfileThumbnail(String profileThumbnail) {
+        ProfileThumbnail = profileThumbnail;
     }
 }

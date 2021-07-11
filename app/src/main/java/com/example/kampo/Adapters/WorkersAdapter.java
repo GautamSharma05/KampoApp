@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.kampo.Fragments.WorkersProfileFragment;
 import com.example.kampo.Models.Workers;
 import com.example.kampo.R;
 import com.example.kampo.databinding.SampleWorkersBinding;
@@ -27,6 +29,13 @@ public class WorkersAdapter extends FirestoreRecyclerAdapter<Workers,WorkersAdap
     protected void onBindViewHolder(@NonNull @NotNull WorkersAdapter.WorkerHolder holder, int position, @NonNull @NotNull Workers model) {
         holder.binding.workerName.setText(model.getFullName());
         Glide.with(holder.binding.workerImage.getContext()).load(model.getProfilePicUri()).placeholder(R.drawable.avatar).into(holder.binding.workerImage);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new WorkersProfileFragment(model.getFullName(),model.getProfilePicUri(),model.getProfileThumbnail())).addToBackStack(null).commit();
+            }
+        });
     }
 
     @NonNull

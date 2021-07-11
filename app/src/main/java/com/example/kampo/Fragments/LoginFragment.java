@@ -1,10 +1,11 @@
 package com.example.kampo.Fragments;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
@@ -15,8 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.kampo.Activity.MainActivity;
+import com.example.kampo.Activity.RegistrationActivity;
 import com.example.kampo.Activity.loaderActivity;
 
+import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +51,15 @@ public class LoginFragment extends Fragment {
 
             }
         });
+        binding.signUpText.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), RegistrationActivity.class);
+            startActivity(intent);
+        });
+        binding.forgotPasswordText.setOnClickListener(v -> {
+            AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.loginContainer,new ForgotPasswordFragment()).addToBackStack(null).commit();
+        });
+
         return binding.getRoot();
     }
 
@@ -90,6 +102,7 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getContext(), "Try Again!", Toast.LENGTH_SHORT).show();
         }
     }
+    
     @Override
     public void onStart() {
         super.onStart();
@@ -99,4 +112,6 @@ public class LoginFragment extends Fragment {
             startActivity(intent);
         }
     }
+
+
 }

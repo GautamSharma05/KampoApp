@@ -150,7 +150,7 @@ public class EditProfileFragment extends Fragment {
             users.put("UserId", mAuth.getUid());
             users.put("UserProfilePic",downloadUrl);
 
-            documentReference.set(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+            documentReference.update(users).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     AppCompatActivity appCompatActivity = (AppCompatActivity)getContext();

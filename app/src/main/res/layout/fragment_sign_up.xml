@@ -152,5 +152,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
+    <TextView
+        android:id="@+id/alreadyHaveAnAccountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Alreay have an Account?"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+
+    <TextView
+        android:id="@+id/logInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Log In"
+        android:textColor="@color/pink"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/alreadyHaveAnAccountText"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
