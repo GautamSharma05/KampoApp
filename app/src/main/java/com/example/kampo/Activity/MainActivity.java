@@ -26,23 +26,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new HomeFragment()).commit();
-        binding.mainScreenBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment temp = null;
-                switch (item.getItemId()){
-                    case R.id.Home: temp = new HomeFragment();
-                        break;
-                    case R.id.Appointment: temp = new AppointmentFragment();
-                        break;
-                    case R.id.Categories: temp = new CategoryFragment();
-                        break;
-                    case R.id.Profile: temp = new ProfileFragment();
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,temp).commit();
-                return false;
+        binding.mainScreenBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Fragment temp = null;
+            switch (item.getItemId()){
+                case R.id.Home: temp = new HomeFragment();
+                    break;
+                case R.id.Appointment: temp = new AppointmentFragment();
+                    break;
+                case R.id.Categories: temp = new CategoryFragment();
+                    break;
+                case R.id.Profile: temp = new ProfileFragment();
+                    break;
             }
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,temp).commit();
+            return false;
         });
     }
 }
