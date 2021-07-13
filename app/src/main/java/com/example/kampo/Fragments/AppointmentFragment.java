@@ -26,7 +26,6 @@ import com.harrywhewell.scrolldatepicker.OnDateSelectedListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -57,7 +56,7 @@ public class AppointmentFragment extends Fragment {
 
         binding.bookAppointment.setOnClickListener(v -> {
             AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
-            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new AddressFragment()).addToBackStack(null).commit();
+            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new PaymentFragment()).addToBackStack(null).commit();
         });
 
 

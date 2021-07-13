@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AddressFragment">
+    tools:context=".Fragments.BillingFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/billingToolBar"
@@ -39,25 +39,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/addAddressText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:text="+ Add new Address"
-        android:textColor="?android:textColorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/billingToolBar" />
 
     <TextView
         android:id="@+id/addressSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/account_rectangle_box"
         android:fontFamily="@font/poppins_medium"
@@ -68,7 +56,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addAddressText" />
+        app:layout_constraintTop_toBottomOf="@+id/billingToolBar" />
 
     <View
         android:id="@+id/line_1"

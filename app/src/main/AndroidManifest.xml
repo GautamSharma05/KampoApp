@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kampo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kampo">
-        <activity android:name=".Activity.loaderActivity"/>
+        <activity android:name=".Activity.MapActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAvTe3sTbMll6NcLtsVok0VZEyODO_5cdw" />
+
+        <activity android:name=".Activity.loaderActivity" />
         <activity android:name=".Activity.RegistrationActivity" />
         <activity android:name=".SplashScreen.SplashScreenActivity">
             <intent-filter>

@@ -35,9 +35,9 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.slider1,"", ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.slider3,"", ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.slider4,"", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/kampo-82b0e.appspot.com/o/SliderImages%2Fslider1.jpg?alt=media&token=d2ba2466-f86d-43fa-9090-e117113aba33","", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/kampo-82b0e.appspot.com/o/SliderImages%2Fslider3.jpg?alt=media&token=90b946dc-8717-4a2a-be92-50651a9780cf","", ScaleTypes.CENTER_CROP));
+        slideModels.add(new SlideModel("https://firebasestorage.googleapis.com/v0/b/kampo-82b0e.appspot.com/o/SliderImages%2Fslider4.jpg?alt=media&token=a2a039b7-67de-457c-923b-f70689942f7e","", ScaleTypes.CENTER_CROP));
         binding.imageSlider.setImageList(slideModels);
         binding.workersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         FirestoreRecyclerOptions<Workers> workers = new FirestoreRecyclerOptions.Builder<Workers>()

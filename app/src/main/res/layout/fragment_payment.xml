@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PaymentFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/paymentToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/paymentHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Confirm Order and Pay"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteY="16dp" />
+
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:id="@+id/addAddressText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="+ Add new Address"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentToolBar" />
+
+
+    <TextView
+        android:id="@+id/addressSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/account_rectangle_box"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Address"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAddressText" />
+
+
+    <View
+        android:id="@+id/line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressSelect" />
+
+    <TextView
+        android:id="@+id/upiPaymentMethodsTesxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="UPI Payment Methods"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_1" />
+
+    <ImageView
+        android:id="@+id/paytmLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/paytm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+
+    <ImageView
+        android:id="@+id/gPayLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/gpay"
+        app:layout_constraintStart_toEndOf="@+id/paytmLogo"
+        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+
+    <ImageView
+        android:id="@+id/phonePayLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/phonepe"
+        app:layout_constraintStart_toEndOf="@+id/gPayLogo"
+        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
