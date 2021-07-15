@@ -42,7 +42,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void moveToSecondary() {
         Intent intent = new Intent(this, LoginActivity.class);
-        finish();
         startActivity(intent);
     }
 }

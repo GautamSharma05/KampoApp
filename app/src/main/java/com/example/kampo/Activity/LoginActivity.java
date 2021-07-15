@@ -29,11 +29,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            finish();
+
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
     }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
