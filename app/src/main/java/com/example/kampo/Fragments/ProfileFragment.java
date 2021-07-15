@@ -53,6 +53,10 @@ public class ProfileFragment extends Fragment {
             AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
             appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new SettingsFragment()).addToBackStack(null).commit();
         });
+        binding.ordersText.setOnClickListener(v -> {
+            AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new AllOrderFragment()).addToBackStack(null).commit();
+        });
 
         //logOut user
         binding.logOutText.setOnClickListener(v -> {

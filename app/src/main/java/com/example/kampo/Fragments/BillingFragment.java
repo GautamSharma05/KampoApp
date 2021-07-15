@@ -43,12 +43,12 @@ public class BillingFragment extends Fragment {
             if(value != null){
                 binding.bookingIdUpdateText.setText(value.getString("BookingId"));
                 binding.customerUpdateName.setText(value.getString("Name"));
-                binding.customerUpdateMobileNumber.setText(value.getString("Mobile Number"));
-                binding.paymentMethodUpdate.setText(value.getString("Payment Method"));
-                binding.specialistNameUpdate.setText(value.getString("Worker Name"));
-                binding.specialistMobileNumberUpdate.setText(value.getString("Worker Mobile Number"));
+                binding.customerUpdateMobileNumber.setText(value.getString("MobileNumber"));
+                binding.paymentMethodUpdate.setText(value.getString("PaymentMethod"));
+                binding.specialistNameUpdate.setText(value.getString("WorkerName"));
+                binding.specialistMobileNumberUpdate.setText(value.getString("WorkerMobileNumber"));
                 binding.bookedSlotUpdate.setText(value.getString("Slot"));
-                binding.bookingUpdatedDate.setText(value.getString("Booking Date"));
+                binding.bookingUpdatedDate.setText(value.getString("BookingDate"));
             }
         });
 
