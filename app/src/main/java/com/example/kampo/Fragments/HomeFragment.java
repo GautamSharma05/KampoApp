@@ -122,4 +122,6 @@ public class HomeFragment extends Fragment {
         super.onStop();
         workersAdapter.stopListening();
     }
+
+
 }

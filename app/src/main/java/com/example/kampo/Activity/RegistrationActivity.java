@@ -18,4 +18,10 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportFragmentManager().beginTransaction().replace(R.id.registrationContainer,new SignUpFragment()).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();}
+
 }

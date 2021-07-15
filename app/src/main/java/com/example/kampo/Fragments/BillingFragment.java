@@ -56,5 +56,4 @@ public class BillingFragment extends Fragment {
         return binding.getRoot();
     }
 
-
 }

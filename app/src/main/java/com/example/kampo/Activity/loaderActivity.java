@@ -16,11 +16,13 @@ public class loaderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_loader);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            }
-        },3000);
+        new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(),MainActivity.class)),3000);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        startActivity(new Intent(this, loaderActivity.class));
+        finish();
     }
 }

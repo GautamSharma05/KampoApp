@@ -5,12 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.example.kampo.Activity.LoginActivity;
 import com.example.kampo.Adapters.SwipePageAdapter;
 import com.example.kampo.R;
@@ -19,8 +14,6 @@ import com.example.kampo.databinding.ActivitySplashScreenBinding;
 public class SplashScreenActivity extends AppCompatActivity {
     ActivitySplashScreenBinding binding;
     SwipePageAdapter swipePageAdapter;
-    private LinearLayout mDotLayout;
-    private TextView[] mDots;
     String prevStarted = "yes";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void moveToSecondary() {
         Intent intent = new Intent(this, LoginActivity.class);
+        finish();
         startActivity(intent);
     }
 }

@@ -96,15 +96,7 @@ public class LoginFragment extends Fragment {
         }
     }
     
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
-        }
-    }
+
 
 
 }
