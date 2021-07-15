@@ -44,4 +44,12 @@ public class Workers {
     public void setProfileThumbnail(String profileThumbnail) {
         ProfileThumbnail = profileThumbnail;
     }
+
+    public String getWorkerId() {
+        return WorkerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        WorkerId = workerId;
+    }
 }

@@ -1,18 +1,12 @@
 package com.example.kampo.Fragments;
 
 import android.app.ProgressDialog;
-
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,26 +14,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentEditProfileBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -47,65 +29,61 @@ import java.util.Objects;
 
 public class EditProfileFragment extends Fragment {
     FragmentEditProfileBinding binding;
-    ArrayAdapter<String> arrayAdapter;
-    Uri selectedImage;
-    String downloadUrl;
-    ProgressDialog progressBar;
-
+    ArrayAdapter<String> arrayAdapter; //Array Adapter
+    Uri selectedImage;  //Image Url
+    String downloadUrl; //Download Image Url
+    ProgressDialog progressBar; //ProgressBar
     String [] gender = {"Male","Female","Others"};
     String genderText;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    //Create Firebase Database Instance
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     private final FirebaseStorage storage =FirebaseStorage.getInstance();
+
+
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEditProfileBinding.inflate(inflater,container,false);
+
+        //Setup progressBar
         progressBar = new ProgressDialog(getContext());
         progressBar.setMessage("Wait till Image Updated...");
         progressBar.setCancelable(false);
-        fStore.collection("Users").document(mAuth.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-               if(value != null){
-                   binding.editProfileUserEmail.setText(value.getString("Email"));
-               }
-            }
+
+        //Getting User Registered Email From Database
+        fStore.collection("Users").document(Objects.requireNonNull(mAuth.getUid())).addSnapshotListener((value, error) -> {
+           if(value != null){
+               binding.editProfileUserEmail.setText(value.getString("Email"));
+           }
         });
 
+
+        //ActivityResultLauncher help us to open Gallery For picking Image from Gallery
         ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>(){
-                    @Override
-                    public void onActivityResult(Uri result) {
-                        binding.changeProfileImage.setImageURI(result);
-                        selectedImage = result;
-                        progressBar.show();
-                        StorageReference reference = storage.getReference().child("Profiles").child(mAuth.getUid());
-                        reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            progressBar.dismiss();
-                                            downloadUrl = uri.toString();
+                result -> {
+                    binding.changeProfileImage.setImageURI(result);
+                    selectedImage = result;
+                    progressBar.show();
 
-                                        }
-                                    }) ;
-                                }
-                            }
-                        });
-                    }
+                    //Store Image in Cloud Storage Database Firebase
+                    StorageReference reference = storage.getReference().child("Profiles").child(mAuth.getUid());
+                    reference.putFile(selectedImage).addOnCompleteListener(task -> {
+                        if(task.isSuccessful()){
+                            reference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                progressBar.dismiss();
+                                downloadUrl = uri.toString(); //Download Url
+                            }) ;
+                        }
+                    });
                 });
-        binding.changeProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGetContent.launch("image/*");
-            }
-        });
-        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item,gender);
+
+        //Set User new Image at the place of default image
+        binding.changeProfileImage.setOnClickListener(v -> mGetContent.launch("image/*"));
+
+        //Options for male,female,other
+        arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, gender);
         binding.spinner.setAdapter(arrayAdapter);
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,21 +97,20 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
-        binding.updateProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateProfile();
-
-
-            }
-        });
+        //Calling Update Profile Function when User click on Button
+        binding.updateProfileButton.setOnClickListener(v -> updateProfile());
 
         return binding.getRoot();
     }
 
+
+
+    //Update Profile Function
     private void updateProfile() {
         String userFullName = binding.userFullNameText.getText().toString().trim();
         String phoneNumber = binding.editUserTextPhone.getText().toString().trim();
+
+        //Checking All the Condition
         if (TextUtils.isEmpty(userFullName)) {
             binding.userFullNameText.setError("Full Name is Required");
         }
@@ -150,18 +127,11 @@ public class EditProfileFragment extends Fragment {
             users.put("UserId", mAuth.getUid());
             users.put("UserProfilePic",downloadUrl);
 
-            documentReference.update(users).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    AppCompatActivity appCompatActivity = (AppCompatActivity)getContext();
-                    appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new ProfileFragment()).addToBackStack(null).commit();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    Toast.makeText(getContext(), "We will resolve your error soon", Toast.LENGTH_SHORT).show();
-                }
-            });
+            documentReference.update(users).addOnSuccessListener(unused -> {
+                AppCompatActivity appCompatActivity = (AppCompatActivity)getContext();
+                assert appCompatActivity != null;
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new ProfileFragment()).addToBackStack(null).commit();
+            }).addOnFailureListener(e -> Toast.makeText(getContext(), "We will resolve your error soon", Toast.LENGTH_SHORT).show());
 
         }
     }

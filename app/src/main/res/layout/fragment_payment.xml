@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="Confirm Order and Pay"
+                android:text="Confirm Address "
                 android:textColor="?android:textColorPrimary"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteY="16dp" />
@@ -81,47 +81,220 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressSelect" />
 
+
+
     <TextView
-        android:id="@+id/upiPaymentMethodsTesxt"
+        android:id="@+id/bookingDetailTextPrev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="UPI Payment Methods"
+        android:text="Booking Details"
         android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_1" />
 
-    <ImageView
-        android:id="@+id/paytmLogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
+
+    <TextView
+        android:id="@+id/customerNameTextPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/paytm"
+        android:fontFamily="@font/poppins_medium"
+        android:text="• Customer Name -"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+        app:layout_constraintTop_toBottomOf="@+id/bookingDetailTextPrev" />
 
-    <ImageView
-        android:id="@+id/gPayLogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
+    <TextView
+        android:id="@+id/customerUpdateNamePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/gpay"
-        app:layout_constraintStart_toEndOf="@+id/paytmLogo"
-        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+        android:fontFamily="@font/poppins_medium"
+        android:text="Customer Name"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/customerNameTextPrev"
+        app:layout_constraintTop_toBottomOf="@+id/bookingDetailTextPrev" />
 
-    <ImageView
-        android:id="@+id/phonePayLogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
+    <TextView
+        android:id="@+id/customerMobileNumberPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/phonepe"
-        app:layout_constraintStart_toEndOf="@+id/gPayLogo"
-        app:layout_constraintTop_toBottomOf="@+id/upiPaymentMethodsTesxt" />
+        android:fontFamily="@font/poppins_medium"
+        android:text="• Mobile Number -"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customerNameTextPrev" />
+
+    <TextView
+        android:id="@+id/customerUpdateMobileNumberPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="xx-xxxx-xxxx"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/customerMobileNumberPrev"
+        app:layout_constraintTop_toBottomOf="@+id/customerUpdateNamePrev" />
+
+    <TextView
+        android:id="@+id/paymentMethodPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="• Payment Method -"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customerMobileNumberPrev" />
+
+    <TextView
+        android:id="@+id/paymentMethodUpdatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="COD"
+        app:layout_constraintStart_toEndOf="@+id/paymentMethodPrev"
+        app:layout_constraintTop_toBottomOf="@+id/customerUpdateMobileNumberPrev" />
+
+    <TextView
+        android:id="@+id/specialistNamePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="• Specialist Name -"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMethodPrev" />
+
+    <TextView
+        android:id="@+id/specialistNameUpdatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Specialist Name"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/specialistNamePrev"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMethodUpdatePrev" />
+
+    <TextView
+        android:id="@+id/specialistMobileNumberPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="• Specialist Number -"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specialistNamePrev" />
+
+    <TextView
+        android:id="@+id/specialistMobileNumberUpdatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Specialist Number"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/specialistMobileNumberPrev"
+        app:layout_constraintTop_toBottomOf="@+id/specialistNameUpdatePrev" />
+
+    <TextView
+        android:id="@+id/bookedSlotTextPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="• Booked Slot -"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specialistMobileNumberPrev" />
+
+    <TextView
+        android:id="@+id/bookedSlotUpdatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="Booked Slot"
+        app:layout_constraintStart_toEndOf="@+id/bookedSlotTextPrev"
+        app:layout_constraintTop_toBottomOf="@+id/specialistMobileNumberUpdatePrev" />
+
+    <TextView
+        android:id="@+id/bookingDatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="• Booking Date -"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookedSlotTextPrev" />
+
+
+    <TextView
+        android:id="@+id/bookingUpdatedDatePrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="Updated Date"
+        app:layout_constraintStart_toEndOf="@+id/bookingDatePrev"
+        app:layout_constraintTop_toBottomOf="@+id/bookedSlotUpdatePrev" />
+
+
+    <Button
+        android:id="@+id/confirmAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/curve_button"
+        android:text="Confirm Adress and Continue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookingUpdatedDatePrev" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

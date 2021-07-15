@@ -262,15 +262,42 @@
         android:text="Booked Slot"
         app:layout_constraintStart_toEndOf="@+id/bookedSlotText"
         app:layout_constraintTop_toBottomOf="@+id/specialistMobileNumberUpdate" />
+    <TextView
+        android:id="@+id/bookingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="• Booking Date -"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookedSlotText" />
+
+
+    <TextView
+        android:id="@+id/bookingUpdatedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="Updated Date"
+        app:layout_constraintStart_toEndOf="@+id/bookingDate"
+        app:layout_constraintTop_toBottomOf="@+id/bookedSlotUpdate" />
 
     <View
         android:id="@+id/line_2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="#D3D3D3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookedSlotText" />
+        app:layout_constraintTop_toBottomOf="@+id/bookingUpdatedDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

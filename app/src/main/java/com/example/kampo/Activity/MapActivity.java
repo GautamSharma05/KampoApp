@@ -88,6 +88,7 @@ public class MapActivity extends AppCompatActivity {
                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                   if(task.isSuccessful()){
                       Toast.makeText(MapActivity.this, "Your Address is saved", Toast.LENGTH_SHORT).show();
+                      Toast.makeText(MapActivity.this, "Press Back Button", Toast.LENGTH_SHORT).show();
                   }
                 }
             });

@@ -2,23 +2,16 @@ package com.example.kampo.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.kampo.Activity.LoginActivity;
-import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentForgotPasswordBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import org.jetbrains.annotations.NotNull;
 
 
 public class ForgotPasswordFragment extends Fragment {
@@ -26,18 +19,22 @@ public class ForgotPasswordFragment extends Fragment {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentForgotPasswordBinding.inflate(inflater,container,false);
 
-        binding.forgotPasswordResetLinkButton.setOnClickListener(v -> {
-            resetLink();
-        });
+        //Calling Reset Link Function when User click on button
+        binding.forgotPasswordResetLinkButton.setOnClickListener(v -> resetLink());
+
+
         return binding.getRoot();
     }
 
+
+    //Reset Link Function
     private void resetLink() {
         String forgotEmailAddress = binding.forgotPasswordEmailAddress.getText().toString();
+        //Checking Email field not be empty
         if(TextUtils.isEmpty(forgotEmailAddress)){
             binding.forgotPasswordEmailAddress.setError("Email Address is Required");
         }
@@ -46,14 +43,11 @@ public class ForgotPasswordFragment extends Fragment {
         }
         else{
             mAuth.sendPasswordResetEmail(forgotEmailAddress)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getContext(), "Reset link send to your E-mail, Check your Inbox", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                startActivity(intent);
-                            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getContext(), "Reset link send to your E-mail, Check your Inbox", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
                         }
                     });
         }

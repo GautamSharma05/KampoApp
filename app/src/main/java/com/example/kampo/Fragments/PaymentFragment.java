@@ -1,34 +1,42 @@
 package com.example.kampo.Fragments;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Toast;
 import com.example.kampo.Activity.MapActivity;
 import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentPaymentBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
 import org.jetbrains.annotations.NotNull;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-
-import dev.shreyaspatil.easyupipayment.EasyUpiPayment;
-import dev.shreyaspatil.easyupipayment.model.PaymentApp;
 
 
 public class PaymentFragment extends Fragment {
+    String WorkerId,FullName,dateSelected,result;
+    //Constructor For getting Values from previous Fragment
+    public PaymentFragment(String workerId, String fullName, String dateSelected,String result) {
+        this.WorkerId = workerId;
+        this.FullName = fullName;
+        this.dateSelected = dateSelected;
+        this.result = result;
+    }
+
     FragmentPaymentBinding binding;
+
+    //Defining Variable
+    String customerName,customerMobileNumber,customerAddress,workerMobileNumber,bookingId;
+
+    //Creating Instances
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     @Override
@@ -39,14 +47,66 @@ public class PaymentFragment extends Fragment {
             Intent intent = new Intent(getActivity(), MapActivity.class);
             startActivity(intent);
         });
-        fStore.collection("Users").document(mAuth.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                    if(value != null){
-                        binding.addressSelect.setText(value.getString("Address"));
-                    }
-            }
+
+        //Getting User Details From Firebase Database
+        fStore.collection("Users").document(Objects.requireNonNull(mAuth.getUid())).addSnapshotListener((value, error) -> {
+                if(value != null){
+                    customerName = value.getString("FullName");
+                    customerMobileNumber = value.getString("PhoneNumber");
+                    customerAddress = value.getString("Address");
+                    binding.customerUpdateNamePrev.setText(customerName);
+                    binding.customerUpdateMobileNumberPrev.setText(customerMobileNumber);
+                    binding.addressSelect.setText(customerAddress);
+                }
         });
+
+        //Getting Worker Details From Worker Database
+        fStore.collection("Workers").document(WorkerId).addSnapshotListener((value, error) -> {
+                if(value != null){
+                    workerMobileNumber = value.getString("WorkerNumber");
+                    binding.specialistMobileNumberUpdatePrev.setText(workerMobileNumber);
+                }
+        });
+
+        //Set text
+       binding.specialistNameUpdatePrev.setText(FullName);
+       binding.bookingUpdatedDatePrev.setText(dateSelected);
+       binding.bookedSlotUpdatePrev.setText(result);
+
+
+       //Booking Details entry in database
+       binding.confirmAddress.setOnClickListener(v -> {
+           DocumentReference documentReference = fStore.collection("Booking").document();
+           bookingId = documentReference.getId();
+           Map<String,Object> booking = new HashMap<>();
+           booking.put("BookingId",bookingId);
+           booking.put("Name",customerName);
+           booking.put("Address",customerAddress);
+           booking.put("Mobile Number",customerMobileNumber);
+           booking.put("Worker Name",FullName);
+           booking.put("Worker Mobile Number",workerMobileNumber);
+           booking.put("Payment Method","cod");
+           booking.put("Slot",result);
+           booking.put("Booking Date",dateSelected);
+           documentReference.set(booking).addOnCompleteListener(task -> {
+              if(task.isSuccessful()){
+                  AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+                  appCompatActivity
+                          .getSupportFragmentManager()
+                          .beginTransaction()
+                          .replace(R.id.frameContainer,new BillingFragment(bookingId))
+                          .addToBackStack(null)
+                          .commit();
+              }
+              else{
+                  Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+              }
+           });
+
+
+       });
+
+
         return binding.getRoot();
     }
 }
