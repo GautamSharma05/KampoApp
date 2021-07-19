@@ -3,13 +3,9 @@ package com.example.kampo.Fragments;
 
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.kampo.Adapters.WorkersAdapter;
 import com.example.kampo.Models.Workers;
-import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentAppointmentBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+
 
 
 public class AppointmentFragment extends Fragment {
@@ -37,7 +26,6 @@ public class AppointmentFragment extends Fragment {
     WorkersAdapter workersAdapter;
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     String dateSelected;
-    List<String> services = new ArrayList<>();
     boolean selectedSpecialist = false;
 
     @Override
@@ -46,7 +34,7 @@ public class AppointmentFragment extends Fragment {
         binding = FragmentAppointmentBinding.inflate(inflater,container,false);
 
         //Date Picker Start Date and Getting Selected Date in dateSelected Variable
-        binding.dayDatePicker.setStartDate(15, 7,2021);
+        binding.dayDatePicker.setStartDate(19, 7,2021);
         binding.dayDatePicker.getSelectedDate(date -> {
             if(date != null){
                 dateSelected = date.toString();

@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -92,6 +93,7 @@ public class PaymentFragment extends Fragment {
 
        //Booking Details entry in database
        binding.confirmAddress.setOnClickListener(v -> {
+
            DocumentReference documentReference = fStore.collection("Booking").document();
            bookingId = documentReference.getId();
            Map<String,Object> booking = new HashMap<>();
@@ -106,6 +108,7 @@ public class PaymentFragment extends Fragment {
            booking.put("UserId",mAuth.getUid());
            booking.put("WorkerId",WorkerId);
            booking.put("Services",services);
+
            booking.put("BookingDate",dateSelected);
            documentReference.set(booking).addOnCompleteListener(task -> {
               if(task.isSuccessful()){

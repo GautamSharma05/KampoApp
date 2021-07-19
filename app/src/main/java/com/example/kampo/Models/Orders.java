@@ -3,7 +3,6 @@ package com.example.kampo.Models;
 public class Orders {
 
     String BookingId,Address,MobileNumber,PaymentMethod,UserId,WorkerId,Slot,WorkerMobileNumber,WorkerName,Name,BookingDate,Services;
-
     public Orders() {
     }
 
@@ -21,6 +20,9 @@ public class Orders {
         BookingDate = bookingDate;
         Services = services;
     }
+
+
+
 
     public String getServices() {
         return Services;

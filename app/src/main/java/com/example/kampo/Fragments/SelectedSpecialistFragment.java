@@ -52,7 +52,7 @@ public class SelectedSpecialistFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSelectedSpecialistBinding.inflate(inflater,container,false);
-        binding.dayDatePicker.setStartDate(17,7,2021);
+        binding.dayDatePicker.setStartDate(19,7,2021);
 
         binding.dayDatePicker.getSelectedDate(date -> {
             if(date != null){
