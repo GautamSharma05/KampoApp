@@ -15,9 +15,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -85,9 +85,11 @@ public class TrackerActivity extends AppCompatActivity {
                                 Double latitude = value.getDouble("Latitude");
                                 Double longitude = value.getDouble("Longitude");
                                 LatLng latLng = new LatLng(latitude,longitude);
-                                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Your Client Location...");
+                                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Coming Soon...").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+
                                 googleMap.addMarker(markerOptions);
                                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
                             }
                     }
                 });
