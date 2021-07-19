@@ -10,6 +10,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -39,17 +40,17 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MapActivity extends AppCompatActivity {
     SupportMapFragment smf;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FusedLocationProviderClient client;
-    Geocoder geocoder;
     double latitude,longitude;
-    List<Address> addresses;
     Button location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MapActivity extends AppCompatActivity {
         location = findViewById(R.id.location);
         smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         client = LocationServices.getFusedLocationProviderClient(this);
-        geocoder = new Geocoder(this, Locale.getDefault());
+
         Dexter.withContext(getApplicationContext()).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
             @Override
             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
@@ -76,25 +77,30 @@ public class MapActivity extends AppCompatActivity {
             }
         }).check();
         location.setOnClickListener(v -> {
-            try {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String address = addresses.get(0).getAddressLine(0);
-            DocumentReference documentReference = fStore.collection("Users").document(mAuth.getUid());
-            documentReference.update("Address",address).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                  if(task.isSuccessful()){
-                      Toast.makeText(MapActivity.this, "Your Address is saved", Toast.LENGTH_SHORT).show();
-                      Toast.makeText(MapActivity.this, "Press Back Button", Toast.LENGTH_SHORT).show();
-                  }
-                }
-            });
 
+            try {
+                Geocoder geocoder;
+                List<Address> addresses;
+                geocoder = new Geocoder(this, Locale.getDefault());
+                addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                String finalAddress = addresses.get(0).getAddressLine(0);
+                DocumentReference documentReference = fStore.collection("Users").document(mAuth.getUid());
+                documentReference.update("Address",finalAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MapActivity.this, "Your Address is saved", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapActivity.this, "Press Back Button", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
     }
+
+
     private void getMyLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -116,11 +122,24 @@ public class MapActivity extends AppCompatActivity {
                     public void onMapReady(@NonNull @org.jetbrains.annotations.NotNull GoogleMap googleMap) {
                         if(location != null) {
                             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here...");
+                             latitude = location.getLatitude();
+                             longitude = location.getLongitude();
+                            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here....");
                             googleMap.addMarker(markerOptions);
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
+                            DocumentReference documentReference = fStore.collection("Users").document(mAuth.getUid());
+                            Map<String,Object> location = new HashMap<>();
+                            location.put("Latitude",String.valueOf(latitude));
+                            location.put("Longitude",String.valueOf(longitude));
+                            documentReference.update(location).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Log.d("Location",latLng.toString());
+                                    }
+                                }
+                            });
                         }
                         else {
                             Toast.makeText(MapActivity.this, "Location Not Found", Toast.LENGTH_SHORT).show();
@@ -130,4 +149,5 @@ public class MapActivity extends AppCompatActivity {
             }
         });
     }
+
 }

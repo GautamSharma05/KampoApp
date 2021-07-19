@@ -1,5 +1,6 @@
 package com.example.kampo.Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kampo.Activity.TrackerActivity;
 import com.example.kampo.Models.Orders;
 
 import com.example.kampo.R;
@@ -31,6 +33,14 @@ public class OrderAdapter extends FirestoreRecyclerAdapter<Orders,OrderAdapter.O
         holder.binding.orderSpecialistMobileNumberUpdate.setText(model.getWorkerMobileNumber());
         holder.binding.orderBookedSlotUpdate.setText(model.getSlot());
         holder.binding.orderBookingUpdatedDate.setText(model.getBookingDate());
+        holder.binding.orderServiceUpdate.setText(model.getServices());
+
+        holder.binding.button.setOnClickListener(v ->{
+            Intent intent = new Intent(v.getContext(), TrackerActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("WorkerId",model.getWorkerId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @NonNull

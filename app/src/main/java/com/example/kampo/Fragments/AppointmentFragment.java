@@ -3,21 +3,33 @@ package com.example.kampo.Fragments;
 
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.kampo.Adapters.WorkersAdapter;
 import com.example.kampo.Models.Workers;
+import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentAppointmentBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 
 public class AppointmentFragment extends Fragment {
@@ -25,7 +37,9 @@ public class AppointmentFragment extends Fragment {
     WorkersAdapter workersAdapter;
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     String dateSelected;
+    List<String> services = new ArrayList<>();
     boolean selectedSpecialist = false;
+
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +50,7 @@ public class AppointmentFragment extends Fragment {
         binding.dayDatePicker.getSelectedDate(date -> {
             if(date != null){
                 dateSelected = date.toString();
+                Toast.makeText(getContext(), dateSelected, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -48,8 +63,19 @@ public class AppointmentFragment extends Fragment {
         binding.specialistRecyclerView.setAdapter(workersAdapter);
 
 
+
+
+
+
+
+
+
+
+
+
         //Attach setOnClickListener and Check All the condition below before send user to another Fragment
         binding.bookAppointment.setOnClickListener(v -> {
+            String services = binding.customerWantServices.getText().toString();
             if(dateSelected == null ){
 
                 //Creating Alert if user is not select date
@@ -76,6 +102,9 @@ public class AppointmentFragment extends Fragment {
 
                 //Checking if User select at least one radio button or not
                 Toast.makeText(getContext(), "Please Select Available Slot", Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(services)){
+                binding.customerWantServices.setError("At least One Service is Required");
             }
             else{
                 Toast.makeText(getContext(), "I don't Know", Toast.LENGTH_SHORT).show();

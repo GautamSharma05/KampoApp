@@ -281,20 +281,46 @@
         app:layout_constraintTop_toBottomOf="@+id/bookedSlotUpdatePrev" />
 
 
+    <TextView
+        android:id="@+id/servicesTextPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="• Services -"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookingDatePrev" />
+
+
+    <TextView
+        android:id="@+id/servicesUpdatedPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Services"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/servicesTextPrev"
+        app:layout_constraintTop_toBottomOf="@+id/bookingUpdatedDatePrev" />
+
     <Button
         android:id="@+id/confirmAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/curve_button"
         android:text="Confirm Adress and Continue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookingUpdatedDatePrev" />
-
+        app:layout_constraintTop_toBottomOf="@+id/servicesUpdatedPrev" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

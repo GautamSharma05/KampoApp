@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kampo">
-        <activity android:name=".Activity.MapActivity"/>
+        <activity android:name=".Activity.TrackerActivity"/>
+        <activity android:name=".Activity.MapActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAvTe3sTbMll6NcLtsVok0VZEyODO_5cdw" />
+            android:value="AIzaSyAChR5cnb2HI9WhK1hFonEECCCnP2E10aI" />
 
         <activity android:name=".Activity.loaderActivity" />
         <activity android:name=".Activity.RegistrationActivity" />
@@ -29,7 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

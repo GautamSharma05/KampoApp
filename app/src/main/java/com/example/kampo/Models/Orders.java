@@ -2,22 +2,32 @@ package com.example.kampo.Models;
 
 public class Orders {
 
-    String BookingId,Address,MobileNumber,PaymentMethod,UserId,Slot,WorkerMobileNumber,WorkerName,Name,BookingDate;
+    String BookingId,Address,MobileNumber,PaymentMethod,UserId,WorkerId,Slot,WorkerMobileNumber,WorkerName,Name,BookingDate,Services;
 
     public Orders() {
     }
 
-    public Orders(String bookingId, String address, String mobileNumber, String paymentMethod, String userId, String slot, String workerMobileNumber, String workerName, String name, String bookingDate) {
+    public Orders(String bookingId, String address, String mobileNumber, String paymentMethod, String userId, String workerId, String slot, String workerMobileNumber, String workerName, String name, String bookingDate, String services) {
         BookingId = bookingId;
         Address = address;
         MobileNumber = mobileNumber;
         PaymentMethod = paymentMethod;
         UserId = userId;
+        WorkerId = workerId;
         Slot = slot;
         WorkerMobileNumber = workerMobileNumber;
         WorkerName = workerName;
         Name = name;
         BookingDate = bookingDate;
+        Services = services;
+    }
+
+    public String getServices() {
+        return Services;
+    }
+
+    public void setServices(String services) {
+        Services = services;
     }
 
     public String getBookingId() {
@@ -98,5 +108,13 @@ public class Orders {
 
     public void setBookingDate(String bookingDate) {
         BookingDate = bookingDate;
+    }
+
+    public String getWorkerId() {
+        return WorkerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        WorkerId = workerId;
     }
 }

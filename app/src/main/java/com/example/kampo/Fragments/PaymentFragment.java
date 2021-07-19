@@ -2,6 +2,8 @@ package com.example.kampo.Fragments;
 
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,25 +22,31 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 
 public class PaymentFragment extends Fragment {
-    String WorkerId,FullName,dateSelected,result;
+    String WorkerId,FullName,dateSelected,result,services;
     //Constructor For getting Values from previous Fragment
-    public PaymentFragment(String workerId, String fullName, String dateSelected,String result) {
+    public PaymentFragment(String workerId, String fullName, String dateSelected,String result,String services) {
         this.WorkerId = workerId;
         this.FullName = fullName;
         this.dateSelected = dateSelected;
         this.result = result;
+        this.services = services;
     }
 
     FragmentPaymentBinding binding;
 
     //Defining Variable
     String customerName,customerMobileNumber,customerAddress,workerMobileNumber,bookingId;
+
 
     //Creating Instances
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -52,6 +60,8 @@ public class PaymentFragment extends Fragment {
             startActivity(intent);
         });
 
+
+
         //Getting User Details From Firebase Database
         fStore.collection("Users").document(Objects.requireNonNull(mAuth.getUid())).addSnapshotListener((value, error) -> {
                 if(value != null){
@@ -63,6 +73,7 @@ public class PaymentFragment extends Fragment {
                     binding.addressSelect.setText(customerAddress);
                 }
         });
+
 
         //Getting Worker Details From Worker Database
         fStore.collection("Workers").document(WorkerId).addSnapshotListener((value, error) -> {
@@ -76,6 +87,7 @@ public class PaymentFragment extends Fragment {
        binding.specialistNameUpdatePrev.setText(FullName);
        binding.bookingUpdatedDatePrev.setText(dateSelected);
        binding.bookedSlotUpdatePrev.setText(result);
+       binding.servicesUpdatedPrev.setText(services);
 
 
        //Booking Details entry in database
@@ -92,18 +104,20 @@ public class PaymentFragment extends Fragment {
            booking.put("PaymentMethod","COD");
            booking.put("Slot",result);
            booking.put("UserId",mAuth.getUid());
+           booking.put("WorkerId",WorkerId);
+           booking.put("Services",services);
            booking.put("BookingDate",dateSelected);
            documentReference.set(booking).addOnCompleteListener(task -> {
               if(task.isSuccessful()){
                   fStore.collection("Workers").document(WorkerId)
-                          .collection("Appointment").document("15-7-2021").update(result,false);
+                          .collection("Appointment").document(dateSelected).update(result,false);
 
                   AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
                   appCompatActivity
                           .getSupportFragmentManager()
                           .beginTransaction()
                           .replace(R.id.frameContainer,new BillingFragment(bookingId))
-                          .addToBackStack(null)
+
                           .commit();
 
               }
@@ -118,4 +132,5 @@ public class PaymentFragment extends Fragment {
 
         return binding.getRoot();
     }
+
 }

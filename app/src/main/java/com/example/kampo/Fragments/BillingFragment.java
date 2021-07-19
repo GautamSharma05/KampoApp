@@ -1,10 +1,14 @@
 package com.example.kampo.Fragments;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.kampo.R;
 import com.example.kampo.databinding.FragmentBillingBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,7 +25,6 @@ public class BillingFragment extends Fragment {
     }
 
     FragmentBillingBinding binding;
-
     //Creating Instances of Firebase Database
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -30,6 +33,13 @@ public class BillingFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentBillingBinding.inflate(inflater,container,false);
+
+
+        //When Order SuccessFull
+        binding.orderPageButton.setOnClickListener(v ->{
+            AppCompatActivity appCompatActivity = (AppCompatActivity)v.getContext();
+            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer,new AllOrderFragment()).commit();
+        });
 
         //Getting User Address From Cloud FireStore Database and Display into The App
         fStore.collection("Users").document(Objects.requireNonNull(mAuth.getUid())).addSnapshotListener((value, error) -> {
@@ -49,6 +59,7 @@ public class BillingFragment extends Fragment {
                 binding.specialistMobileNumberUpdate.setText(value.getString("WorkerMobileNumber"));
                 binding.bookedSlotUpdate.setText(value.getString("Slot"));
                 binding.bookingUpdatedDate.setText(value.getString("BookingDate"));
+                binding.servicesUpdated.setText(value.getString("Services"));
             }
         });
 
