@@ -26,6 +26,7 @@ public class AppointmentFragment extends Fragment {
     WorkersAdapter workersAdapter;
     private final FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     String dateSelected;
+    
     boolean selectedSpecialist = false;
 
     @Override
